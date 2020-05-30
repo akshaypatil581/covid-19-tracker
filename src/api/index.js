@@ -16,6 +16,22 @@ export const fetchData = async () => {
     }
 }
 
+export const fetchDailyData = async () => {
+    try {
+        const { data } = await axios.get(`${url}/daily`);
+        
+        const modifiedData = data.map((dailyData) => ({
+            confirmed: dailyData.confirmed.total,
+            deaths: dailyData.deaths.total,
+            date: dailyData.reportDate,
+        }));
+        
+        return modifiedData;
+    } catch (error) {
+        
+    }
+}
+
 /*
 Here we are doing destructuring of data if we don't do the destructuring it will
 show undefined { data } - thats the way of destructuring provided in React
